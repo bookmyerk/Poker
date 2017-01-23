@@ -1,4 +1,4 @@
-package PokerTools;
+package pokerTools;
 
 class Deck {
 	static private boolean[][] isMissing = new boolean[13][4];

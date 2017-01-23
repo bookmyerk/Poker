@@ -1,4 +1,4 @@
-package PokerTools;
+package pokerTools;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package PokerTools;
+package pokerTools;
 
 class ScoreSheet {
 	String playerName;

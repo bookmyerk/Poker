@@ -1,4 +1,4 @@
-package PokerTools;
+package pokerTools;
 
 class Card {
 	private int rank;
