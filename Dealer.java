@@ -45,8 +45,8 @@ public static void main(String[] args) {
 		for (Player p: players) {
 			Card c = Deck.getCard();
             outputLine = p.getPlayerName() + " is dealt " + c.getFormattedCard();
-            int dealRank = c.getRank();
-            int dealSuit = c.getSuit();
+//            int dealRank = c.getRank();
+//            int dealSuit = c.getSuit();
 //          outputLine += " (internally known as " + dealRank + "," + dealSuit + ")";
             System.out.println(outputLine);
 			p.takeCard(c);

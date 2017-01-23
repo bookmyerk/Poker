@@ -3,7 +3,7 @@ package PokerTools;
 class Deck {
 	static private boolean[][] isMissing = new boolean[13][4];
 
-	static private int hackCnt;
+//	static private int hackCnt;
 
 	static Card getCard(){
 		int rank;
