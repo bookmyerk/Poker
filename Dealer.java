@@ -10,7 +10,7 @@ public class Dealer {
 		int finalSheetUpperBound;
 		int max;
 		for(rankCount = scoreSheets[0].cardCount - 1;rankCount > -1;rankCount--) {
-			max = 0;
+			max = -1;//set below threshold of any card value since 0 is 2 due to array index tracking the value
 			finalSheetUpperBound = 0;
 			ScoreSheet[] finalSheets = new ScoreSheet[cCnt];
 			for(ScoreSheet ss: scoreSheets) {
@@ -32,7 +32,7 @@ public class Dealer {
 	}
 
 public static void main(String[] args) {
-	String outputLine = "";
+	String outputLine;
 	int playerCount;
 	int i = 0;
 	playerCount = args.length;
@@ -44,11 +44,15 @@ public static void main(String[] args) {
 	for(i=1;i<6;i++){
 		for (Player p: players) {
 			Card c = Deck.getCard();
-			System.out.println(c.getFormattedCard());
+            outputLine = p.getPlayerName() + " is dealt " + c.getFormattedCard();
+            int dealRank = c.getRank();
+            int dealSuit = c.getSuit();
+//          outputLine += " (internally known as " + dealRank + "," + dealSuit + ")";
+            System.out.println(outputLine);
 			p.takeCard(c);
 		}
 	}
-	Deck.listCardsMissing();
+    outputLine = "\n";
 	ScoreSheet[] sSheets = new ScoreSheet[playerCount];
 	for (i=0;i<playerCount;i++) {
 		sSheets[i] = players[i].GetScoreSheet();
@@ -138,7 +142,7 @@ public static void main(String[] args) {
                 }
                 break;
             case 2://resolve single pair.
-                max = 0;
+                max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                 finalSheetCount = 1;
                 finalSheetUpperBound = 0;
                 finalSheets = new ScoreSheet[contenderCount];
@@ -167,7 +171,7 @@ public static void main(String[] args) {
                 }
                 break;
             case 3://Two Pairs
-                max = 0;
+                max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                 finalSheetCount = 1;
                 finalSheetUpperBound = 0;
                 finalSheets = new ScoreSheet[contenderCount];
@@ -188,7 +192,7 @@ public static void main(String[] args) {
                     outputLine = playerName + " wins. - with pair of " + fmtRank;
                 }
                 else {
-                    max = 0;
+                    max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                     finalSheetCount = 1;
                     finalSheetUpperBound = 0;
                     finalSheets = new ScoreSheet[contenderCount];
@@ -217,7 +221,7 @@ public static void main(String[] args) {
                 }
                 break;
             case 4:
-                max = 0;
+                max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                 finalSheetCount = 1;
                 finalSheetUpperBound = 0;
                 finalSheets = new ScoreSheet[contenderCount];
@@ -257,7 +261,7 @@ public static void main(String[] args) {
                 }
                 break;
             case 7:
-                max = 0;
+                max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                 finalSheetCount = 1;
                 finalSheetUpperBound = 0;
                 finalSheets = new ScoreSheet[contenderCount];
@@ -278,7 +282,7 @@ public static void main(String[] args) {
                     outputLine = playerName + " wins. - with three (from full house): " + fmtRank;
                 }
                 else {
-                    max = 0;
+                    max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                     finalSheetCount = 1;
                     finalSheetUpperBound = 0;
                     finalSheets = new ScoreSheet[contenderCount];
@@ -308,7 +312,7 @@ public static void main(String[] args) {
                 }
                 break;
             case 8:
-                max = 0;
+                max = -1; //set below threshold of any card value since 0 is 2 due to array index tracking the value
                 finalSheetUpperBound = 0;
                 finalSheetCount = 1;
                 finalSheets = new ScoreSheet[contenderCount];

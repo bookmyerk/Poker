@@ -4,13 +4,13 @@ class ScoreSheet {
 	String playerName;
 	int cardCount = 0;
 	int[] ranks;
-	int highPair = 0;
-	int lowPair = 0;
-	int threeKind = 0;
-	int fourKind = 0;
-	int rankLevel = 0;
+	int highPair = -1;
+	int lowPair = -1;
+	int threeKind = -1;
+	int fourKind = -1;
+	int rankLevel = -1;
 	int uniqueSingles = 0;
-	int winningSingle = 0;
+	int winningSingle = -1;
 	String[] hand;
 	String cardsHeld;
 

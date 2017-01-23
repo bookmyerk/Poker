@@ -65,10 +65,10 @@ class Player {
 				switch (x){
 					case 4:
 						ss.rankLevel = 8;//Four of a kind
-						ss.fourKind = i;//offset making 0 index 2 card value (i.e. 3, King, Ace, etc.)
+						ss.fourKind = i;
 						break;
 					case 3:
-						ss.threeKind = i;//offset making 0 index 2 card value
+						ss.threeKind = i;
 						if(ss.rankLevel == 2){
 							ss.rankLevel = 7;//Full house
 						}
