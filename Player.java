@@ -52,89 +52,80 @@ class Player {
 		ScoreSheet ss = new ScoreSheet(cardCount);
 		ss.playerName = this.playerName;
 		ss.rankLevel = 1;
-
-		int[] tempSuits = new int[cardCount];
-		System.arraycopy(suits,0,tempSuits,0,suits.length);
-		Arrays.sort(tempSuits);
-		if (tempSuits[0] == tempSuits[cardCount - 1]) {
-			ss.rankLevel = 6;//Flush
-		}
-		if (ss.rankLevel == 1){
-			i = 0;
-			for (int x: rankScores){
-				switch (x){
-					case 4:
-						ss.rankLevel = 8;//Four of a kind
-						ss.fourKind = i;
-						break;
-					case 3:
-						ss.threeKind = i;
-						if(ss.rankLevel == 2){
-							ss.rankLevel = 7;//Full house
-						}
-						else {
-							ss.rankLevel = 4;//Three of a kind
-						}
-						break;
-					case 2:
-						if (ss.rankLevel == 2){
-							ss.rankLevel = 3;//Two pair
-							ss.lowPair = ss.highPair;
-							ss.highPair = i;
-						}
-						else if(ss.rankLevel == 4){
-							ss.rankLevel = 7;//Full house
-							ss.highPair = i;
-						}
-						else {
-							ss.rankLevel = 2;//Pair
-							ss.highPair = i;
-						}
-						break;
-					case 1:
-						ss.uniqueSingles++;
+		i = 0;
+		for (int x: rankScores){
+			switch (x){
+				case 4:
+					ss.rankLevel = 8;//Four of a kind
+					ss.fourKind = i;
+					break;
+				case 3:
+					ss.threeKind = i;
+					if(ss.rankLevel == 2){
+						ss.rankLevel = 7;//Full house
 					}
-				i++;
+					else {
+						ss.rankLevel = 4;//Three of a kind
+					}
+					break;
+				case 2:
+					if (ss.rankLevel == 2){
+						ss.rankLevel = 3;//Two pair
+						ss.lowPair = ss.highPair;
+						ss.highPair = i;
+					}
+					else if(ss.rankLevel == 4){
+						ss.rankLevel = 7;//Full house
+						ss.highPair = i;
+					}
+					else {
+						ss.rankLevel = 2;//Pair
+						ss.highPair = i;
+					}
+					break;
+				case 1:
+					ss.uniqueSingles++;
+				}
+			i++;
+		}
+		if (ss.uniqueSingles == cardCount){
+			if (ranks[cardCount - 1] == cardCount - 1 + ranks[0]) {
+				ss.rankLevel = 5;//Straight
 			}
-			if (ss.uniqueSingles == cardCount){
-				if (ranks[cardCount - 1] == cardCount - 1 + ranks[0]) {
-					if (ss.rankLevel == 6) {
-						ss.rankLevel = 9;//Straight Flush
-					} else {
+			else {
+				if (ranks[cardCount - 1] == 12){//Ace low straight
+					if (ranks[cardCount - 2] == 3){
+						int [] aceLowStraightRanks = new int[cardCount];
+						int [] aceLowStraightSuits = new int[cardCount];
+						for (i=0;i < cardCount; i++){
+							if (i < cardCount - 1) {
+								aceLowStraightSuits[i + 1] = suits[i];
+								aceLowStraightRanks[i + 1] = ranks[i];
+							}
+							else {
+								aceLowStraightSuits[0] = suits[i];
+								aceLowStraightRanks[0] = ranks[i];
+							}
+						}
+						suits = aceLowStraightSuits;
+						ranks = aceLowStraightRanks;
+
 						ss.rankLevel = 5;//Straight
 					}
 				}
-				///*
-				else {
-					if (ranks[cardCount - 1] == 12){//Ace low straight
-					    if (ranks[cardCount - 2] == 3){
-					        int [] aceLowStraightRanks = new int[cardCount];
-                            int [] aceLowStraightSuits = new int[cardCount];
-                            for (i=0;i < cardCount; i++){
-					            if (i < cardCount - 1) {
-                                    aceLowStraightSuits[i + 1] = suits[i];
-                                    aceLowStraightRanks[i + 1] = ranks[i];
-                                }
-                                else {
-                                    aceLowStraightSuits[0] = suits[i];
-                                    aceLowStraightRanks[0] = ranks[i];
-                                }
-                            }
-                            suits = aceLowStraightSuits;
-                            ranks = aceLowStraightRanks;
-
-                            if (ss.rankLevel == 6) {
-                                ss.rankLevel = 9;//Straight Flush
-                            } else {
-                                ss.rankLevel = 5;//Straight
-                            }
-                        }
-                    }
-				}
-				//*/
-			}
+            }
 		}
-        i = 0;
+        int[] tempSuits = new int[cardCount];
+        System.arraycopy(suits,0,tempSuits,0,suits.length);
+        Arrays.sort(tempSuits);
+        if (tempSuits[0] == tempSuits[cardCount - 1]) {
+            if (ss.rankLevel == 5) {
+                ss.rankLevel = 9;//Straight Flush
+            } else {
+                ss.rankLevel = 6;//Flush
+            }
+        }
+		i = 0;
         for (Card c: cards) {
             c.setRank(ranks[i]);
             c.setSuit(suits[i]);
