@@ -35,6 +35,11 @@ public static void main(String[] args) {
 	String outputLine;
 	int playerCount;
 	int i = 0;
+	if(args.length == 0)
+    {
+        System.out.println("Please provide at least two player names...");
+        System.exit(0);
+    }
 	playerCount = args.length;
 	Player[] players = new Player[playerCount];
 	for (String s: args) {
